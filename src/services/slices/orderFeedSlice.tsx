@@ -1,4 +1,4 @@
-import { getFeedsApi } from '@api';
+import { getFeedsApi, getOrdersApi } from '@api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { TOrdersData } from '@utils-types';
 
@@ -19,6 +19,11 @@ export const orderFeedThunk = createAsyncThunk('feed/getOrders', async () => {
   const data = await getFeedsApi();
   return data;
 });
+
+export const getOrdersThunk = createAsyncThunk(
+  'orders/getOrders',
+  getOrdersApi
+);
 
 const orderFeedSlice = createSlice({
   name: 'feed',
@@ -42,6 +47,17 @@ const orderFeedSlice = createSlice({
         state.totalToday = action.payload.totalToday;
       })
       .addCase(orderFeedThunk.rejected, (state, action) => {
+        state.isFeedLoading = false;
+        state.error = action.error.message || '';
+      })
+      .addCase(getOrdersThunk.pending, (state) => {
+        state.isFeedLoading = true;
+      })
+      .addCase(getOrdersThunk.fulfilled, (state, action) => {
+        state.isFeedLoading = false;
+        state.orders = action.payload;
+      })
+      .addCase(getOrdersThunk.rejected, (state, action) => {
         state.isFeedLoading = false;
         state.error = action.error.message || '';
       });

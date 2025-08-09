@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
@@ -9,17 +9,32 @@ import {
   orderSelector
 } from '../../services/slices/orderSlice';
 import { deleteAllIngredients } from '../../services/slices/burgerConstructorSlice';
-import { useNavigate } from 'react-router-dom';
+import {
+  checkUserAuthThunk,
+  isAuthSelector
+} from '../../services/slices/userProfileSlice';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const constructorItems = useSelector((state) => state.burgerConstructor);
   const orderRequest = useSelector(isOrderRequest);
   const orderModalData = useSelector(orderSelector);
+  const isAuthChecked = useSelector(isAuthSelector);
+
+  useEffect(() => {
+    dispatch(checkUserAuthThunk());
+  }, []);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!isAuthChecked) {
+      navigate('/login', { state: { backgroundLocation: location } });
+      return;
+    }
     const { bun, ingredients } = constructorItems;
     dispatch(
       orderBurgerThunk([

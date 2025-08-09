@@ -9,7 +9,6 @@ import { FC, useEffect } from 'react';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 
 export const ConstructorPage: FC = () => {
-  /** TODO: взять переменную из стора */
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.ingredients);
 

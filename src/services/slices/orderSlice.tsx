@@ -7,12 +7,14 @@ type orderSliceType = {
   order: TOrder | null;
   orderRequest: boolean;
   error: string | null;
+  feedOrder: TOrder | null;
 };
 
 const initialState: orderSliceType = {
   order: null,
   orderRequest: false,
-  error: null
+  error: null,
+  feedOrder: null
 };
 
 export const orderBurgerThunk = createAsyncThunk(
@@ -59,7 +61,7 @@ const orderSlice = createSlice({
       })
       .addCase(orderDetailsThunk.fulfilled, (state, action) => {
         state.orderRequest = false;
-        state.order = action.payload.orders[0];
+        state.feedOrder = action.payload.orders[0];
       })
       .addCase(orderDetailsThunk.rejected, (state, action) => {
         state.orderRequest = false;
@@ -71,4 +73,5 @@ const orderSlice = createSlice({
 export const { clearOrder } = orderSlice.actions;
 export const orderSelector = (state: RootState) => state.order.order;
 export const isOrderRequest = (state: RootState) => state.order.orderRequest;
+export const feedOrderSelector = (state: RootState) => state.order.feedOrder;
 export default orderSlice.reducer;

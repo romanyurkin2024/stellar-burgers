@@ -4,20 +4,23 @@ import { OrderInfoUI } from '../ui/order-info';
 import { TIngredient } from '@utils-types';
 import { useParams } from 'react-router-dom';
 import {
-  orderDetailsThunk,
-  orderSelector
+  feedOrderSelector,
+  orderDetailsThunk
 } from '../../services/slices/orderSlice';
 import { useDispatch, useSelector } from '../../services/store';
 import { ingredientsSelector } from '../../services/slices/ingredientsSlice';
+import { isOrderRequest } from '../../services/slices/orderSlice';
 
 export const OrderInfo: FC = () => {
   const { number } = useParams();
   const dispatch = useDispatch();
+  const isOrderLoading = useSelector(isOrderRequest);
+
   useEffect(() => {
     dispatch(orderDetailsThunk(Number(number)));
   }, []);
 
-  const orderData = useSelector(orderSelector);
+  const orderData = useSelector(feedOrderSelector);
   const ingredients: TIngredient[] = useSelector(ingredientsSelector);
 
   /* Готовим данные для отображения */
@@ -62,7 +65,7 @@ export const OrderInfo: FC = () => {
     };
   }, [orderData, ingredients]);
 
-  if (!orderInfo) {
+  if (!orderInfo || isOrderLoading) {
     return <Preloader />;
   }
 

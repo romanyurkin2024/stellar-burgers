@@ -17,6 +17,8 @@ import { AppHeader, IngredientDetails, Modal, OrderInfo } from '@components';
 import { useEffect } from 'react';
 import { useDispatch } from '../../services/store';
 import { fetchIngredients } from '../../services/slices/ingredientsSlice';
+import { ProtectedRoute } from '../protected-route';
+import { checkUserAuthThunk } from '../../services/slices/userProfileSlice';
 
 const App = () => {
   const navigate = useNavigate();
@@ -30,6 +32,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchIngredients());
+    dispatch(checkUserAuthThunk());
   }, []);
 
   return (
@@ -40,16 +43,60 @@ const App = () => {
         <Route path='/feed' element={<Feed />} />
 
         {/* Защищенные роуты */}
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
+        <Route
+          path='/login'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <Login />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <Register />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/forgot-password'
+          element={
+            <ProtectedRoute onlyUnAuth>
+              <ForgotPassword />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/reset-password' element={<ResetPassword />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/orders' element={<ProfileOrders />} />
+        <Route
+          path='/profile'
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path='/profile/orders'
+          element={
+            <ProtectedRoute>
+              <ProfileOrders />
+            </ProtectedRoute>
+          }
+        />
         {/* Защищенные роуты */}
 
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route
+          path='/profile/orders/:number'
+          element={
+            <ProtectedRoute>
+              <OrderInfo />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -71,11 +118,16 @@ const App = () => {
               </Modal>
             }
           />
+          <Route
+            path='/profile/orders/:number'
+            element={
+              <Modal title='Информация о заказе' onClose={handleCloseModal}>
+                <OrderInfo />
+              </Modal>
+            }
+          />
         </Routes>
       )}
-      {/* 
-      <Route path='/profile/orders/:number' element={<Modal><OrderInfo /></Modal>}> /> 
-      */}
     </div>
   );
 };
