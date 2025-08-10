@@ -84,7 +84,6 @@ const App = () => {
             </ProtectedRoute>
           }
         />
-        {/* Защищенные роуты */}
 
         <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route path='/feed/:number' element={<OrderInfo />} />

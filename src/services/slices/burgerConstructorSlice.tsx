@@ -15,6 +15,9 @@ const initialState: BurgerConstructorSliceType = {
 const burgerConstructorSlice = createSlice({
   name: 'burgerConstructor',
   initialState,
+  selectors: {
+    constructorBurgerSelector: (state) => state
+  },
   reducers: {
     setBun(state, action: PayloadAction<TIngredient | null>) {
       state.bun = action.payload;
@@ -72,3 +75,4 @@ export const {
 } = burgerConstructorSlice.actions;
 
 export default burgerConstructorSlice.reducer;
+export const { constructorBurgerSelector } = burgerConstructorSlice.selectors;

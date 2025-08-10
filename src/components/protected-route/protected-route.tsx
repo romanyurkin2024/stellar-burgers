@@ -21,7 +21,7 @@ export const ProtectedRoute = ({
   const user = useSelector(userSelector);
   const location = useLocation();
 
-  if (!isAuthChecked && loginUserRequest) {
+  if (!isAuthChecked || loginUserRequest) {
     return <Preloader />;
   }
 
@@ -30,15 +30,8 @@ export const ProtectedRoute = ({
   }
 
   if (onlyUnAuth && user) {
-    const { backgroundLocation } = location.state ?? {
-      backgroundLocation: { pathname: '/' }
-    };
-    return (
-      <Navigate
-        to={backgroundLocation}
-        state={{ backgroundLocation: location }}
-      />
-    );
+    const from = location.state?.backgroundLocation || { pathname: '/' };
+    return <Navigate to={from} replace />;
   }
 
   return children;

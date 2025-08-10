@@ -18,7 +18,7 @@ export const OrderInfo: FC = () => {
 
   useEffect(() => {
     dispatch(orderDetailsThunk(Number(number)));
-  }, []);
+  }, [dispatch, number]);
 
   const orderData = useSelector(feedOrderSelector);
   const ingredients: TIngredient[] = useSelector(ingredientsSelector);
