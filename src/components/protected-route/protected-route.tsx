@@ -21,7 +21,7 @@ export const ProtectedRoute = ({
   const user = useSelector(userSelector);
   const location = useLocation();
 
-  if (!isAuthChecked || loginUserRequest) {
+  if (loginUserRequest) {
     return <Preloader />;
   }
 
