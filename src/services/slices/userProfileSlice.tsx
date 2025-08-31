@@ -18,7 +18,7 @@ type UserProfile = {
   isAuthenticated: boolean;
 };
 
-const initialState: UserProfile = {
+export const userInitialState: UserProfile = {
   user: null,
   error: '',
   loginUserRequest: false,
@@ -68,7 +68,7 @@ export const logoutUserThunk = createAsyncThunk('user/logout', async () => {
 
 const userProfileSlice = createSlice({
   name: 'user',
-  initialState,
+  initialState: userInitialState,
   reducers: {
     clearAllFormFields(state) {
       state.error = '';

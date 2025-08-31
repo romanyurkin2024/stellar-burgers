@@ -10,7 +10,7 @@ type orderSliceType = {
   feedOrder: TOrder | null;
 };
 
-const initialState: orderSliceType = {
+export const orderSliceInitialState: orderSliceType = {
   order: null,
   orderRequest: false,
   error: null,
@@ -35,7 +35,7 @@ export const orderDetailsThunk = createAsyncThunk(
 
 const orderSlice = createSlice({
   name: 'order',
-  initialState,
+  initialState: orderSliceInitialState,
   reducers: {
     clearOrder(state) {
       state.orderRequest = false;
