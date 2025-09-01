@@ -1,8 +1,8 @@
-import { TIngredient } from "@utils-types";
-import ingredientsReducer, { fetchIngredients } from "../ingredientsSlice";
-import { getIngredientsApi } from "@api";
+import { TIngredient } from '@utils-types';
+import ingredientsReducer, { fetchIngredients } from '../ingredientsSlice';
+import { getIngredientsApi } from '@api';
 
-jest.mock('@api'); 
+jest.mock('@api');
 
 const mockIngredients: TIngredient[] = [
   {
@@ -21,15 +21,17 @@ const mockIngredients: TIngredient[] = [
 ];
 
 describe('Тестируем ingredientsSlice:', () => {
-  
   test('Тестируем REQUEST ассинхронного экшена fetchIngredients: ', () => {
-    const pendingState = ingredientsReducer(undefined, fetchIngredients.pending('', undefined));
-    
+    const pendingState = ingredientsReducer(
+      undefined,
+      fetchIngredients.pending('', undefined)
+    );
+
     expect(pendingState.loading).toBe(true);
     expect(pendingState.error).toBeNull();
     expect(pendingState.data).toEqual([]);
   });
-  
+
   test('Тестируем FAILED ассинхронного экшена fetchIngredients:', () => {
     const error = {
       message: 'Ошибка загрузки'
@@ -37,14 +39,18 @@ describe('Тестируем ingredientsSlice:', () => {
 
     const nextState = ingredientsReducer(
       undefined,
-      fetchIngredients.rejected({ name: 'Error', message: 'Ошибка загрузки' }, '', undefined)
+      fetchIngredients.rejected(
+        { name: 'Error', message: 'Ошибка загрузки' },
+        '',
+        undefined
+      )
     );
 
     expect(nextState.loading).toBe(false);
     expect(nextState.error).toBe('Ошибка загрузки');
     expect(nextState.data).toEqual([]);
   });
-  
+
   test('Тестируем SUCCESS ассинхронного экшена fetchIngredients:', () => {
     const state = ingredientsReducer(
       undefined,

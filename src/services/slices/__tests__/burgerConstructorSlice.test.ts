@@ -1,7 +1,15 @@
-import { mockConstructorIngredient, mockIngredient } from "../__mocks__/mockData";
-import constructorReducer, { addIngredient, BurgerConstructorSliceType, constructorInitialState, deleteIngredient, toDownIngredient, toUpIngredient } from "../burgerConstructorSlice";
-
-
+import {
+  mockConstructorIngredient,
+  mockIngredient
+} from '../__mocks__/mockData';
+import constructorReducer, {
+  addIngredient,
+  BurgerConstructorSliceType,
+  constructorInitialState,
+  deleteIngredient,
+  toDownIngredient,
+  toUpIngredient
+} from '../burgerConstructorSlice';
 
 describe('Тестируем burgerConstructorSlice:', () => {
   let stateAfterAdd: BurgerConstructorSliceType;
@@ -14,7 +22,9 @@ describe('Тестируем burgerConstructorSlice:', () => {
   });
 
   test('Тестируем начальное состояние: ', () => {
-    expect(constructorReducer(undefined, { type: 'test' })).toEqual(constructorInitialState);
+    expect(constructorReducer(undefined, { type: 'test' })).toEqual(
+      constructorInitialState
+    );
   });
 
   test('Тестирование добавления ингредиента в конструктор:', () => {

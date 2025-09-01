@@ -40,7 +40,7 @@ export const mockIngredient: TIngredient = {
   price: 100,
   image: '',
   image_mobile: '',
-  image_large: '',
+  image_large: ''
 };
 
 export const mockConstructorIngredient: TConstructorIngredient = {
@@ -65,7 +65,7 @@ export const mockOrderResponse = {
 };
 
 export const mockGetOrderResponse = {
-  orders: mockOrders,  
+  orders: mockOrders,
   success: true
 };
 
