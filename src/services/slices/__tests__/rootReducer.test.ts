@@ -18,13 +18,7 @@ describe('Проверка rootReducer', () => {
       feed: orderInitialState,
       user: userInitialState
     };
-
-    expect(initialState).toHaveProperty('ingredients');
-    expect(initialState).toHaveProperty('burgerConstructor');
-    expect(initialState).toHaveProperty('order');
-    expect(initialState).toHaveProperty('feed');
-    expect(initialState).toHaveProperty('user');
-
+    
     expect(initialState).toEqual(expectedState);
   });
 });
