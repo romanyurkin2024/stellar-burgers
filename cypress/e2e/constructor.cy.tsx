@@ -16,11 +16,14 @@ describe('Страница конструктора бургера', function(){
 
   const ingredientsTypes = ['bun', 'main', 'sauce']; 
   it('Тестируем добавление ингредиентов в конструктор', () => {
-    ingredientsTypes.forEach(ingredient => {
+
+    ingredientsTypes.forEach((ingredient, index) => {
       cy.get(`[data-cy=${ingredient}]`)
         .find('.common_button')
         .first()
-        .click();
+        .click()
+        
+      cy.get('[data-cy=constructor-item]').should('have.length', index + 1);
     });
   })
 

@@ -1,4 +1,9 @@
 import { rootReducer } from '../../store';
+import { constructorInitialState } from '../burgerConstructorSlice';
+import { ingredientsInitialState } from '../ingredientsSlice';
+import { orderInitialState } from '../orderFeedSlice';
+import { orderSliceInitialState } from '../orderSlice';
+import { userInitialState } from '../userProfileSlice';
 
 describe('Проверка rootReducer', () => {
   it('должен вернуть начальное состояние при неизвестном action', () => {
@@ -6,10 +11,20 @@ describe('Проверка rootReducer', () => {
 
     expect(initialState).toBeDefined();
 
+    const expectedState = {
+      ingredients: ingredientsInitialState,
+      burgerConstructor: constructorInitialState,
+      order: orderSliceInitialState,
+      feed: orderInitialState,
+      user: userInitialState
+    };
+
     expect(initialState).toHaveProperty('ingredients');
     expect(initialState).toHaveProperty('burgerConstructor');
     expect(initialState).toHaveProperty('order');
     expect(initialState).toHaveProperty('feed');
     expect(initialState).toHaveProperty('user');
+
+    expect(initialState).toEqual(expectedState);
   });
 });
