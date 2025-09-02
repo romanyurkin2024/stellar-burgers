@@ -18,7 +18,7 @@ describe('Проверка rootReducer', () => {
       feed: orderInitialState,
       user: userInitialState
     };
-    
+
     expect(initialState).toEqual(expectedState);
   });
 });

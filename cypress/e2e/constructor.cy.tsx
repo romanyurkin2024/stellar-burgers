@@ -14,18 +14,25 @@ describe('Страница конструктора бургера', function(){
     cy.get('[data-test=burger-ingredient]').should('have.length.at.least', 5);
   });
 
-  const ingredientsTypes = ['bun', 'main', 'sauce']; 
+  const ingredientsTypes = ['bun', 'main', 'sauce'];
   it('Тестируем добавление ингредиентов в конструктор', () => {
+    cy.fixture('ingredients.json').its('data').as('ingredientsData');
+    cy.get('[data-cy=make-order-button]').parents('section').as('constructorSection');
 
-    ingredientsTypes.forEach((ingredient, index) => {
-      cy.get(`[data-cy=${ingredient}]`)
-        .find('.common_button')
-        .first()
-        .click()
-        
-      cy.get('[data-cy=constructor-item]').should('have.length', index + 1);
+    ingredientsTypes.forEach((type) => {
+      cy.get('@ingredientsData').then((ingredients) => {
+        const ingredientToAdd = ingredients.find(ing => ing.type === type);
+
+        cy.get('@constructorSection').should('not.contain', ingredientToAdd.name);
+        if (type === 'bun') {
+          cy.get('@constructorSection').contains('Выберите булки').should('exist');
+        }
+        cy.get(`[data-cy=${type}]`).find('button').first().click();
+        cy.get('@constructorSection').should('contain', ingredientToAdd.name);
+      });
     });
-  })
+  });
+
 
   it('Открытие и закрытие модального окна по клику на крестик', () => {
     cy.get('[data-cy=ingredient-card]').first().click();
