@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "data": [
+    {
+      "_id": "60d3b41abdacab0026a733c6",
+      "name": "Краторная булка N-200i",
+      "type": "bun",
+      "proteins": 80,
+      "fat": 24,
+      "carbohydrates": 53,
+      "calories": 420,
+      "price": 1255,
+      "image": "https://code.s3.yandex.net/react/code/bun-02.png",
+      "image_mobile": "https://code.s3.yandex.net/react/code/bun-02-mobile.png",
+      "image_large": "https://code.s3.yandex.net/react/code/bun-02-large.png"
+    },
+    {
+      "_id": "60d3b41abdacab0026a733c8",
+      "name": "Филе Люминесцентного тетраодонтимформа",
+      "type": "main",
+      "proteins": 44,
+      "fat": 26,
+      "carbohydrates": 85,
+      "calories": 643,
+      "price": 988,
+      "image": "https://code.s3.yandex.net/react/code/meat-03.png",
+      "image_mobile": "https://code.s3.yandex.net/react/code/meat-03-mobile.png",
+      "image_large": "https://code.s3.yandex.net/react/code/meat-03-large.png"
+    }, 
+    {
+    "_id": "ing-unique-001",
+    "name": "Темпоральная булка V-5000",
+    "type": "bun",
+    "proteins": 5,
+    "fat": 1,
+    "carbohydrates": 2,
+    "calories": 50,
+    "price": 3000,
+    "image": "https://code.s3.yandex.net/react/code/bun-01.png",
+    "image_mobile": "https://code.s3.yandex.net/react/code/bun-01.png",
+    "image_large": "https://code.s3.yandex.net/react/code/bun-01.png"
+  },
+  {
+    "_id": "ing-unique-002",
+    "name": "Плазменное филе Сверхновой",
+    "type": "main",
+    "proteins": 100,
+    "fat": 0,
+    "carbohydrates": 0,
+    "calories": 9001,
+    "price": 9999,
+    "image": "https://code.s3.yandex.net/react/code/meat-01.png",
+    "image_mobile": "https://code.s3.yandex.net/react/code/meat-01.png",
+    "image_large": "https://code.s3.yandex.net/react/code/meat-01.png"
+  },
+  {
+    "_id": "ing-unique-003",
+    "name": "Слёзы единорога",
+    "type": "sauce",
+    "proteins": 0,
+    "fat": 0,
+    "carbohydrates": 100,
+    "calories": 250,
+    "price": 777,
+    "image": "https://code.s3.yandex.net/react/code/sauce-02.png",
+    "image_mobile": "https://code.s3.yandex.net/react/code/sauce-02.png",
+    "image_large": "https://code.s3.yandex.net/react/code/sauce-02.png"
+  }
+  ]
+}

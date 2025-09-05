@@ -7,7 +7,7 @@ type orderFeedSliceType = {
   error: string | null;
 };
 
-const initialState: TOrdersData & orderFeedSliceType = {
+export const orderInitialState: TOrdersData & orderFeedSliceType = {
   orders: [],
   total: 0,
   totalToday: 0,
@@ -27,7 +27,7 @@ export const getOrdersThunk = createAsyncThunk(
 
 const orderFeedSlice = createSlice({
   name: 'feed',
-  initialState,
+  initialState: orderInitialState,
   reducers: {},
   selectors: {
     totalSelector: (state) => state.total,
